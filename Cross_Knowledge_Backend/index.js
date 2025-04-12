@@ -1,5 +1,5 @@
 const express = require('express');
-
+require('dotenv').config();
 const { Server } = require('socket.io');
 const http = require('http');
 
@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { ConnectionDB } = require('./db.config');
 const path = require('path');
-require('dotenv').config();
+
 
 const discussionRouter = require('./src/routers/discussionRoutes');
 
@@ -45,7 +45,9 @@ app.use('/api/marketplace', marketplaceRoutes);
 app.use('/api/product', reviewRoutes);
 app.use('/api/chat', chatRouter);
 
-
+app.get('/', (req, res) => {
+  res.send('Hello from backend!');
+});
 
 io.on('connection', (socket) => {
     console.log(`🟢 Socket connected: ${socket.id}`);
