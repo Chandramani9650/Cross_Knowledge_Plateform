@@ -6,21 +6,46 @@ const SignUp = () => {
     email: "",
     password: "",
     role: "learner", // Default role is "learner"
-    bio: "",
-    skills: "",
-    profilePic: "",
+  
   });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('http://localhost:8000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Signup successful!");
+        console.log(data);
+        // Redirect or clear form, etc.
+      } else {
+        alert(data.message || "Signup failed.");
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      alert("Something went wrong!");
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    alert("Sign Up submitted successfully!");
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Form Data Submitted:", formData);
+  //   alert("Sign Up submitted successfully!");
+  // };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md ">

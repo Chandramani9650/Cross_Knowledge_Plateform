@@ -19,13 +19,15 @@ const chatSchema = new mongoose.Schema({
       type: String, // Text or media URL
       required: true,
     },
+    seen: { type: Boolean, default: false },
+
     timestamp: {
       type: Date,
       default: Date.now,
     }
   });
   
-const chatwithMentor = mongoose.model('Chat', messageSchema);
-module.exports = { chatwithMentor };
+const Chat = mongoose.model('Chat', chatSchema);
+module.exports = {Chat };
 
   

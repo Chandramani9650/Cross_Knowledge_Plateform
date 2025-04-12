@@ -1,38 +1,70 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('http://localhost:8000/api/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+  
+      const data = await res.json();
+  
+      if (res.ok) {
+        console.log('Login successful:', data);
+        alert("Login successful!");
+        navigate('/');
+        // You can store token or redirect user here
+      } else {
+        console.error('Login failed:', data.message);
+        alert(data.message || "Login failed.");
+      }
+    } catch (err) {
+      console.error('Error during login:', err);
+    }
+  };
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const res = await axios.post("http://localhost:5000/api/auth/signin", formData, {
-        withCredentials: true
-      });
+  //   try {
+  //     const res = await axios.post("http://localhost:8000/api/auth/signin", formData, {
+  //       withCredentials: true
+  //     });
 
-      console.log(res.data);
-      alert("Login Successful");
-    } catch (err) {
-      console.error(err.response?.data);
-      alert(err.response?.data.message || "Login failed");
-    }
-  };
+  //     console.log(res.data);
+  //     alert("Login Successful");
+  //   } catch (err) {
+  //     console.error(err.response?.data);
+  //     alert(err.response?.data.message || "Login failed");
+  //   }
+  // };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-xl mb-4 text-start">SIGN <span className='text-gray-700 font-semibold text-xl mb-4'>IN</span></h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         {/* Email */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Email</label>

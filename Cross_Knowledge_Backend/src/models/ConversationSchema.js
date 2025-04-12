@@ -7,10 +7,10 @@ const conversationSchema = new mongoose.Schema({
         ref: 'User',
       }
     ],
-    product: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product', // optional: tie it to a specific product if needed
-    },
+    // product: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'Product', // optional: tie it to a specific product if needed
+    // },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -18,4 +18,5 @@ const conversationSchema = new mongoose.Schema({
   });
   
   const Conversation = mongoose.model('Conversation', conversationSchema);
+  module.exports = { Conversation };
   

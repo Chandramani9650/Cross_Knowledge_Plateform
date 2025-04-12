@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//Content posted by Mentors
 const learningModelSchema  = new mongoose.Schema({
     title: {type: String, required: true}, 
     description: {type: String, required: true},
@@ -12,7 +13,7 @@ const learningModelSchema  = new mongoose.Schema({
     timestamps: true,
 })
 
-
+//Learner’s progress submission
 const WorkSampleSchema = new mongoose.Schema({
     learner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     module: { type: mongoose.Schema.Types.ObjectId, ref: 'LearningModule' },

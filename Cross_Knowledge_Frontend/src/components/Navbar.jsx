@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const linkStyle = `relative py-1 hover:text-indigo-600`;
   const underlineStyle = `absolute left-0 bottom-0 w-full h-0.5 bg-indigo-600 transition-opacity duration-500 opacity-0 group-hover:opacity-100`;
-
+  
   return (
     <div className='w-full px-4 flex justify-between items-center border-b border-gray-300 mb-5 text-sm py-4'>
       
