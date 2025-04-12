@@ -23,8 +23,8 @@ const LessonsList = () => {
             onClick={() => navigate(`/lesson/${lesson.id}`)} // Navigates to the specific lesson page
           >
             <img
-              src={lesson.image} // Image for the lesson
-              alt={lesson.lessonName}
+                src={lesson.img[1]} // Displaying the first image from the array
+                alt={lesson.lessonTitle}
               className='bg-neutral-100 w-full h-44 object-cover'
             />
             <div className='p-4'>

@@ -38,6 +38,33 @@ import tribal1 from './Folk_Tribal_Painting_img1.jpg';
 import tribal2 from './Folk_Tribal_Painting_img2.jpg';
 import tribal3 from './Folk_Tribal_Painting_img3.jpg';
 
+import silver1 from './SilverMaking_img1.jpg'
+import silver2 from './SilverMaking_img2.jpg'
+
+import stone1 from './StoneCarving_img1.jpg'
+import stone2 from './StoneCarving_img1.jpg'
+import stone3 from './StoneCarving_img1.jpg'
+
+import ToyMaking1 from './ToyMaking_img1.jpg'
+import ToyMaking2 from './ToyMaking_img2.jpg'
+
+import WarliArt1 from './WarliArt_img1.jpg'
+import WarliArt2 from './WarliArt_img2.jpg'
+
+import WoodCarving1 from './WoodCarving_img1.jpg'
+import WoodCarving2 from './WoodCarving_img2.jpg'
+import WoodCarving3 from './WoodCarving_img3.jpg'
+
+
+
+
+
+
+
+
+
+
+
 const images = {
   mandala1,
   mandala2,
@@ -78,6 +105,23 @@ const images = {
   tribal1,
   tribal2,
   tribal3,
+
+  silver1,
+  silver2,
+
+  stone1,
+  stone2,
+  stone3,
+
+  ToyMaking1,
+  ToyMaking2,
+
+  WarliArt1,
+  WarliArt2,
+
+  WoodCarving1,
+  WoodCarving2,
+  WoodCarving3,
 };
 
 export default images;

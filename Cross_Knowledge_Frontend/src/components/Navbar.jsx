@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import assets from "../assets/assets.js";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaChevronDown, FaBars, FaTimes } from "react-icons/fa";
@@ -6,47 +6,54 @@ import { FaUserCircle, FaChevronDown, FaBars, FaTimes } from "react-icons/fa";
 const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
+  const [token, setToken] = useState(true); // Simulated auth state
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Simulated auth state
-  const [token, setToken] = useState(true);
-  const [userRole, setUserRole] = useState("both");
+  const dropdownRef = useRef(null);
 
   const linkStyle = `relative py-1 hover:text-indigo-600`;
   const underlineStyle = `absolute left-0 bottom-0 w-full h-0.5 bg-indigo-600 transition-opacity duration-500 opacity-0 group-hover:opacity-100`;
 
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <div className='w-full px-4 flex justify-between items-center border-b border-gray-300 mb-5 text-sm py-4'>
-      
-      {/* Left - Logo */}
+
+      {/* Logo */}
       <img
         className="cursor-pointer w-44 h-20 rounded-2xl shadow-sm"
         src={assets.logo}
         alt="logo"
         onClick={() => navigate("/")}
       />
-   
-      {/* Desktop Nav + Auth/Profile */}
-      <div className='hidden md:flex gap-6 items-center'>
 
-        {/* Middle Nav Links */}
+      {/* Desktop Nav */}
+      <div className='hidden md:flex gap-6 items-center'>
         <ul className='flex items-center font-medium gap-6 text-gray-700'>
-          <>
-            <NavLink to="/about" className="group">
-              <li className={linkStyle}>
-                ABOUT
-                <div className={underlineStyle}></div>
-              </li>
-            </NavLink>
-            <NavLink to="/contact" className="group">
-              <li className={linkStyle}>
-                CONTACT
-                <div className={underlineStyle}></div>
-              </li>
-            </NavLink>
-          </>
+          <NavLink to="/about" className="group">
+            <li className={linkStyle}>
+              ABOUT
+              <div className={underlineStyle}></div>
+            </li>
+          </NavLink>
+          <NavLink to="/contact" className="group">
+            <li className={linkStyle}>
+              CONTACT
+              <div className={underlineStyle}></div>
+            </li>
+          </NavLink>
         </ul>
 
-        {/* Right - Buttons or Profile */}
+        {/* Right side buttons / profile */}
         <div className='flex items-center gap-4 relative'>
           {!token ? (
             <>
@@ -64,21 +71,44 @@ const Navbar = () => {
               </button>
             </>
           ) : (
-            <div className='flex items-center gap-2 cursor-pointer relative group'>
+            <div
+              className='flex items-center gap-2 cursor-pointer relative'
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              ref={dropdownRef}
+            >
               <FaUserCircle className="text-2xl text-gray-600" />
               <FaChevronDown className="text-xs mt-1 text-gray-500" />
-              <div className='absolute top-10 right-0 text-base font-medium text-gray-700 z-20 hidden group-hover:block'>
-                <div className='min-w-48 bg-white shadow-lg rounded-xl p-4 flex flex-col gap-3'>
-                  <p onClick={() => navigate("/my-profile")} className='hover:text-black cursor-pointer'>My Profile</p>
-                  <p onClick={() => setToken(false)} className='hover:text-black cursor-pointer'>Logout</p>
+
+              {dropdownOpen && (
+                <div className='absolute top-10 right-0 text-base font-medium text-gray-700 z-20'>
+                  <div className='min-w-48 bg-white shadow-lg rounded-xl p-4 flex flex-col gap-3'>
+                    <p
+                      onClick={() => {
+                        navigate("/my-profile");
+                        setDropdownOpen(false);
+                      }}
+                      className='hover:text-black cursor-pointer'
+                    >
+                      My Profile
+                    </p>
+                    <p
+                      onClick={() => {
+                        setToken(false);
+                        setDropdownOpen(false);
+                      }}
+                      className='hover:text-black cursor-pointer'
+                    >
+                      Logout
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>
       </div>
 
-      {/* Burger Icon - Mobile Only */}
+      {/* Burger icon */}
       <div className='md:hidden flex justify-end pr-[12px] w-full'>
         <FaBars
           onClick={() => setShowMenu(true)}
@@ -86,9 +116,7 @@ const Navbar = () => {
         />
       </div>
 
-
-
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <div className={`${showMenu ? 'fixed w-full h-full' : 'h-0 w-0'} md:hidden right-0 top-0 z-20 overflow-hidden bg-white transition-all duration-300`}>
         <div className='flex justify-between items-center px-4 py-3 border-b'>
           <img src={assets.logo} alt="logo" className='w-32 rounded-xl shadow' />

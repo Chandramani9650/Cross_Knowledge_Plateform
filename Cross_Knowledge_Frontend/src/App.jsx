@@ -13,6 +13,8 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import Header from './components/Header'
 import LessonsList from './pages/LessonsList'
+import LessonDetail from './pages/SingleLessonPage'
+import LessonPage from './pages/SingleLessonPage'
 
 
 
@@ -25,7 +27,7 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <div className="flex-1 mx-4 sm:mx-[10%]">
           <Home/>
-          <LessonsList/>
+          <LessonPage/>
         </div>
 
         <Footer className="mt-auto" />
