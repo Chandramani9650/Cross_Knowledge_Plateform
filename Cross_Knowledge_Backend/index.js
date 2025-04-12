@@ -45,9 +45,12 @@ app.use('/api/marketplace', marketplaceRoutes);
 app.use('/api/product', reviewRoutes);
 app.use('/api/chat', chatRouter);
 
-app.get('/', (req, res) => {
-  res.send('Hello from backend!');
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
 
 io.on('connection', (socket) => {
     console.log(`🟢 Socket connected: ${socket.id}`);
