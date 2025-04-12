@@ -11,6 +11,8 @@ import MyProfile from './pages/MyProfile'
 import Categories from './components/Categories'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
+import Header from './components/Header'
+import LessonsList from './pages/LessonsList'
 
 
 
@@ -22,8 +24,8 @@ function App() {
     <>
       <div className="flex flex-col min-h-screen">
         <div className="flex-1 mx-4 sm:mx-[10%]">
-          <Navbar />
-          {/* Your main content goes here */}
+          <Home/>
+          <LessonsList/>
         </div>
 
         <Footer className="mt-auto" />

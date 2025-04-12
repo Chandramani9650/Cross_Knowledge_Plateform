@@ -10,6 +10,7 @@ import sacred3 from './Sacred_Ritual_Decorative_Arts_img3.jpg';
 import sacred4 from './Sacred_Ritual_Decorative_Arts_img4.jpg';
 
 import tradition1 from './traditional_knowledge_img1.jpg';
+import group_people from './group_people.jpg'
 
 import weaving1 from './weaving_img1.jpg';
 import weaving2 from './weaving_img2.jpg';
@@ -54,6 +55,7 @@ const images = {
   sacred4,
 
   tradition1,
+  group_people,
 
   weaving1,
   weaving2,

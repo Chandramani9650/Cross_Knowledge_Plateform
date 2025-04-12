@@ -8,7 +8,7 @@ const Categories = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='flex flex-col items-center gap-4 my-16 text-zinc-900 md:mx-10'>
+    <div className='flex flex-col items-center gap-4 my-16 text-zinc-900 md:mx-10 ' id='category'>
       <h1 className='text-3xl font-bold'>Explore Our Categories</h1>
       <p className='sm:w-1/3 text-center text-sm text-zinc-500'>
         Discover different cultural crafts, traditions, and arts from across India.

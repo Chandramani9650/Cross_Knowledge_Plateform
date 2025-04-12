@@ -30,7 +30,8 @@ const Login = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <h2 className="text-xl mb-4 text-start">SIGN <span className='text-gray-700 font-semibold text-xl mb-4'>IN</span></h2>
+
       <form onSubmit={handleSubmit}>
         {/* Email */}
         <div className="mb-4">
@@ -61,9 +62,9 @@ const Login = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition"
+          className="w-full bg-indigo-600 text-sm text-white py-2 rounded-md hover:bg-gray-800 transition"
         >
-          Login
+          Sign In
         </button>
       </form>
     </div>
